@@ -33,12 +33,23 @@
     <div class="container mt-4">
         <h3>Danh mục sản phẩm</h3>
         <div class="row">
-            <div class="col-md-3"><button class="btn btn-outline-primary w-100">Giày Nam</button></div>
-            <div class="col-md-3"><button class="btn btn-outline-primary w-100">Giày Nữ</button></div>
-            <div class="col-md-3"><button class="btn btn-outline-primary w-100">Giày Trẻ Em</button></div>
-            <div class="col-md-3"><button class="btn btn-outline-primary w-100">Giày Thể Thao</button></div>
+            <?php
+            $categories = [
+                1 => "Giày Nam",
+                2 => "Giày Nữ",
+                3 => "Giày Trẻ Em",
+                4 => "Giày Thể Thao"
+            ];
+            foreach ($categories as $id => $category) : ?>
+                <div class="col-md-3">
+                    <a href="index.php?controller=product&action=category&id=<?php echo $id; ?>" class="btn btn-outline-primary w-100">
+                        <?php echo $category; ?>
+                    </a>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
+
 
     <!-- Danh sách sản phẩm -->
     <div class="container mt-4">

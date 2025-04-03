@@ -1,25 +1,51 @@
 <?php
-require_once __DIR__ . '/../app/controllers/HomeController.php';
-$controller = new HomeController();
-
-
+// Lấy giá trị controller và action từ URL (hoặc đặt mặc định)
 $controller = isset($_GET['controller']) ? $_GET['controller'] : 'home';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
-// Chuyển đổi thành tên file controller
+// Xác định đường dẫn file controller
 $controllerFile = "../app/controllers/" . ucfirst($controller) . "Controller.php";
 
+// Kiểm tra xem file controller có tồn tại không
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
+    
     $className = ucfirst($controller) . "Controller";
-    $controllerObject = new $className();
+    
+    // Kiểm tra xem class có tồn tại không
+    if (class_exists($className)) {
+        $controllerObject = new $className();
+        
+        // Dùng switch-case để điều hướng action
+        switch ($action) {
+            case 'index':
+                $controllerObject->index();
+                break;
 
-    if (method_exists($controllerObject, $action)) {
-        $controllerObject->$action();
+            case 'detail':
+                if (method_exists($controllerObject, 'detail')) {
+                    $controllerObject->detail();
+                } else {
+                    echo "Lỗi: Action 'detail' không tồn tại!";
+                }
+                break;
+
+            case 'category':
+                if (method_exists($controllerObject, 'category')) {
+                    $controllerObject->category();
+                } else {
+                    echo "Lỗi: Action 'category' không tồn tại!";
+                }
+                break;
+
+            default:
+                echo "Lỗi: Action '$action' không hợp lệ!";
+                break;
+        }
     } else {
-        echo "Action không tồn tại!";
+        echo "Lỗi: Controller '$className' không tồn tại!";
     }
 } else {
-    echo "Controller không tồn tại!";
+    echo "Lỗi: File controller '$controllerFile' không tồn tại!";
 }
 ?>
