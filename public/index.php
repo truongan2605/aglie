@@ -9,13 +9,13 @@ $controllerFile = "../app/controllers/" . ucfirst($controller) . "Controller.php
 // Kiểm tra xem file controller có tồn tại không
 if (file_exists($controllerFile)) {
     require_once $controllerFile;
-    
+
     $className = ucfirst($controller) . "Controller";
-    
+
     // Kiểm tra xem class có tồn tại không
     if (class_exists($className)) {
         $controllerObject = new $className();
-        
+
         // Dùng switch-case để điều hướng action
         switch ($action) {
             case 'index':
@@ -38,6 +38,14 @@ if (file_exists($controllerFile)) {
                 }
                 break;
 
+            case 'search':
+                if (method_exists($controllerObject, 'search')) {
+                    $controllerObject->search();
+                } else {
+                    echo "Lỗi: Action 'search' không tồn tại!";
+                }
+                break;
+
             default:
                 echo "Lỗi: Action '$action' không hợp lệ!";
                 break;
@@ -48,4 +56,3 @@ if (file_exists($controllerFile)) {
 } else {
     echo "Lỗi: File controller '$controllerFile' không tồn tại!";
 }
-?>

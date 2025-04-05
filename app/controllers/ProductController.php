@@ -60,5 +60,22 @@ class ProductController {
         $product = $this->products[$id];
         include '../app/views/product_detail.php';
     }
+
+    public function search() {
+        $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+    
+        $filteredProducts = [];
+    
+        if ($keyword !== '') {
+            foreach ($this->products as $key => $product) {
+                if (stripos($product['name'], $keyword) !== false || stripos($product['description'], $keyword) !== false) {
+                    $filteredProducts[$key] = $product;
+                }
+            }
+        }
+    
+        include '../app/views/search_result.php';
+    }
+    
 }
 ?>
