@@ -46,6 +46,23 @@ if (file_exists($controllerFile)) {
                 }
                 break;
 
+            case 'contact':
+                if (method_exists($controllerObject, 'contact')) {
+                    $controllerObject->contact();
+                } else {
+                    echo "Lỗi: Action 'contact' không tồn tại!";
+                }
+                break;
+
+            case 'blog':
+                if (method_exists($controllerObject, 'blog')) {
+                    $controllerObject->blog();
+                } else {
+                    echo "Lỗi: Action 'blog' không tồn tại!";
+                }
+                break;
+
+
             default:
                 echo "Lỗi: Action '$action' không hợp lệ!";
                 break;

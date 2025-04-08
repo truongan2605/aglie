@@ -19,8 +19,9 @@
             <!-- Menu trái -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="./">Trang chủ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Sản phẩm</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?controller=product&action=index">Sản phẩm</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?controller=page&action=blog">Bài viết</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.php?controller=page&action=contact">Liên hệ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Giỏ hàng <i class="bi bi-cart"></i></a></li>
             </ul>
 
@@ -35,4 +36,3 @@
         </div>
     </div>
 </nav>
-
